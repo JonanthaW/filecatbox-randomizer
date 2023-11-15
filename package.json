@@ -1,0 +1,15 @@
+{
+  "name": "filecatbox-randomizer",
+  "version": "1.0.0",
+  "description": "Generate random links from catbox",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firefox": "^0.0.1",
+    "selenium-webdriver": "^4.15.0"
+  }
+}
