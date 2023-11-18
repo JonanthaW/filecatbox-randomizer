@@ -46,7 +46,7 @@ async function tryLink(driver, tabNumber) {
         const text = await element.getText();
 
         if (text === "404! not found!") {
-            console.log(`Tab ${tabNumber}: Link not found for URL: ${url}`);
+            //console.log(`Tab ${tabNumber}: Link not found for URL: ${url}`);
             await driver.sleep(100);
             await tryLink(driver, tabNumber);
         } else {
