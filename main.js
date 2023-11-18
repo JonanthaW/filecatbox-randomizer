@@ -3,10 +3,10 @@ const firefox = require('selenium-webdriver/firefox');
 
 
 // Get the number of drivers from the user (replace 2 with the desired number)
-const numDrivers = 2;
+const numDrivers = 1;
 
 // Constants
-const ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 const MAX_URL_LENGTH = 6;
 const BASE_URL = 'https://files.catbox.moe/';
 
@@ -46,11 +46,11 @@ async function tryLink(driver, tabNumber) {
         const text = await element.getText();
 
         if (text === "404! not found!") {
-            //console.log(`Tab ${tabNumber}: Link not found for URL: ${url}`);
-            await driver.sleep(50);
+            console.log(`Tab ${tabNumber}: Link not found for URL: ${url}`);
+            await driver.sleep(100);
             await tryLink(driver, tabNumber);
         } else {
-            console.log(`Tab ${tabNumber}: Link found! URL: ${url}`);
+            console.log(`Tab ${tabNumber}: Link found! URL: ${BASE_URL}${url}.mp4`);
             await tryLink(driver, tabNumber);
         }
     } catch (error) {
