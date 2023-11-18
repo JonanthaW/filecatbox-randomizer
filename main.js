@@ -1,47 +1,73 @@
-const { Builder, By, Key, until } = require('selenium-webdriver');
+const { Builder, By } = require('selenium-webdriver');
 const firefox = require('selenium-webdriver/firefox');
 
-const alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
-let driver;
 
-(async function initialize() {
+// Get the number of drivers from the user (replace 2 with the desired number)
+const numDrivers = 2;
+
+// Constants
+const ALPHABET = "abcdefghijklmnopqrstuvwxyz0123456789";
+const MAX_URL_LENGTH = 6;
+const BASE_URL = 'https://files.catbox.moe/';
+
+// Function to initialize WebDrivers
+async function initializeWebDrivers(numDrivers) {
+    const drivers = [];
+
     try {
         let options = new firefox.Options();
-        driver = await new Builder()
-                    .forBrowser('firefox')
-                    .setFirefoxOptions(options.addArguments('--headless')) // Browser should not appear
-                    .build();
-        await tryLink();
-    }
-    catch (err) {
-        console.log(err);
-    }
-})();
 
-async function tryLink() {
-    let url = generateURL();
+        for (let i = 0; i < numDrivers; i++) {
+            const driver = await new Builder()
+                .forBrowser('firefox')
+                .setFirefoxOptions(options.addArguments('--headless'))
+                .build(); 
+            drivers.push(driver);
+        }
+
+        console.log(`${numDrivers} WebDrivers initialized successfully.`);
+
+        // Run tryLink for all tabs concurrently
+        await Promise.all(drivers.map((driver, index) => tryLink(driver, index + 1)));
+    } catch (err) {
+        console.error('Error initializing WebDrivers:', err);
+    } finally {
+        // Close all drivers when done
+        await Promise.all(drivers.map(driver => driver.quit()));
+    }
+}
+
+// Main function to attempt accessing the link
+async function tryLink(driver, tabNumber) {
+    let url = generateRandomURL();
     try {
-        await driver.get(`https://files.catbox.moe/${url}.mp4`);
+        await driver.get(`${BASE_URL}${url}.mp4`);
         const element = await driver.findElement(By.tagName('html'));
         const text = await element.getText();
 
         if (text === "404! not found!") {
-            //console.log('Link not found!');
+            //console.log(`Tab ${tabNumber}: Link not found for URL: ${url}`);
             await driver.sleep(50);
-            await tryLink();
+            await tryLink(driver, tabNumber);
         } else {
-            console.log('Link found! = ' + url);
-            await tryLink();
+            console.log(`Tab ${tabNumber}: Link found! URL: ${url}`);
+            await tryLink(driver, tabNumber);
         }
     } catch (error) {
-        console.error('An error occurred:', error);
+        console.error(`Tab ${tabNumber}: An error occurred:`, error);
     }
 }
 
-function generateURL() {
+// Function to generate a random URL
+function generateRandomURL() {
     let url = "";
-    for (let i = 0; i < 6; i++) {
-        url += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+    for (let i = 0; i < MAX_URL_LENGTH; i++) {
+        url += ALPHABET.charAt(Math.floor(Math.random() * ALPHABET.length));
     }
     return url;
 }
+
+// Execute the initialization
+(async function () {
+    await initializeWebDrivers(numDrivers);
+})();
