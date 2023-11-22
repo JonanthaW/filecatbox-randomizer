@@ -3,7 +3,7 @@ const firefox = require('selenium-webdriver/firefox');
 const fs = require('fs').promises;
 
 // Get the number of drivers from the user (replace 2 with the desired number)
-const numDrivers = 20;
+const numDrivers = 1;
 
 // Constants
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -53,10 +53,10 @@ async function tryLink(driver, tabNumber) {
 
     try {
         await driver.get(`${BASE_URL}${url}.mp4`);
-        const element = await driver.findElement(By.tagName('html'));
-        const text = await element.getText();
+        const element_img = await driver.findElement(By.css ("body > img:nth-child(1)"))
+        const src = await element_img.getAttribute('src')
 
-        if (text === "404! not found!") {
+        if (src == "https://files.catbox.moe/official/images/404.png") {
             console.log(`Tab ${tabNumber}: Link not found for URL: ${url}`);
             await addToNotFoundURLs(url); // Add the URL to the notFoundURLs file
             await driver.sleep(50);
