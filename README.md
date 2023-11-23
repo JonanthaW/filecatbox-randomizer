@@ -15,11 +15,23 @@ Gere aleatóriamente conteúdo hosteado no [catbox.moe](https://catbox.moe/). O 
 
 ### :computer: Como instalar a aplicação:
 
+* Os dois scripts fazem a mesma coisa. Escolha um ou outro.
+
+* NODEJS
 ```bash
 git clone https://github.com/JonanthaW/filecatbox-randomizer.git
 npm install selenium-webdriver firefox
 node main.js
 ```
+* PYTHON
+```bash
+git clone https://github.com/JonanthaW/filecatbox-randomizer.git
+pip install selenium && pip install firefox
+python main.py
+```
+
+
+
 
 O script rodará em modo "-headless", ou seja, não abrirá nenhuma janela e tudo acontecerá pelo terminal.
 
