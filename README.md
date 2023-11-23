@@ -43,7 +43,7 @@ O script rodará em modo "-headless", ou seja, não abrirá nenhuma janela e tud
 
 # :bulb: Detalhes:
 
-* O arquivo "notFoundURLs.txt" contém os URLS testados (321474) e não encontrados.
+* O arquivo "notFoundURLs.txt" contém os URLS testados (321474 links no dia 22/11/2023) e não encontrados.
 
 * Por padrão, o script abrirá apenas 1 tab do firefox. Você pode mudar essa quantia por meio da variável:
 ```
