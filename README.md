@@ -33,6 +33,7 @@ python main.py
 
 
 
+
 O script rodará em modo "-headless", ou seja, não abrirá nenhuma janela e tudo acontecerá pelo terminal.
 
 * Sites encontrados pelo script aparecerão assim:
@@ -41,6 +42,8 @@ O script rodará em modo "-headless", ou seja, não abrirá nenhuma janela e tud
 </p>
 
 # :bulb: Detalhes:
+
+* O arquivo "notFoundURLs.txt" contém os URLS testados (321474) e não encontrados.
 
 * Por padrão, o script abrirá apenas 1 tab do firefox. Você pode mudar essa quantia por meio da variável:
 ```
