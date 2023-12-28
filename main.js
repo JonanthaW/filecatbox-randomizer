@@ -53,10 +53,13 @@ async function tryLink(driver, tabNumber) {
 
     try {
         await driver.get(`${BASE_URL}${url}.mp4`);
-        const element_img = await driver.findElement(By.css ("body > img:nth-child(1)"))
-        const src = await element_img.getAttribute('src')
-
-        if (src == "https://files.catbox.moe/official/images/404.png") {
+        //const element_img = await driver.findElement(By.css ("body > img:nth-child(1)"))
+        //const src_img = await element_img.getAttribute('src')
+        // if (src == "https://files.catbox.moe/official/images/404.png")
+        const element = await driver.findElement(By.css("body"));
+        const src = await element.getText();
+    
+        if (src == "404! not found!") {
             console.log(`Tab ${tabNumber}: Link not found for URL: ${url}`);
             await addToNotFoundURLs(url); // Add the URL to the notFoundURLs file
             await driver.sleep(50);

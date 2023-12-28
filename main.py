@@ -41,10 +41,14 @@ def try_link(driver):
 
     try:
         driver.get(f"{BASE_URL}{url}.mp4")
-        element = driver.find_element(By.CSS_SELECTOR, "body > img:nth-child(1)")
-        src = element.get_attribute('src')
+        ##element = driver.find_element(By.CSS_SELECTOR, "body > img:nth-child(1)")
+        ##src = element.get_attribute('src')
+        ##if src == "https://files.catbox.moe/official/images/404.png":
+        
+        element = driver.find_element(By.CSS_SELECTOR, "body")
+        src = element.text
 
-        if src == "https://files.catbox.moe/official/images/404.png":
+        if src == "404! not found!":
             print(f"Link not found for URL: {url}")
             add_to_not_found_urls(url)  # Add the URL to the notFoundURLs file
             time.sleep(0.05)
