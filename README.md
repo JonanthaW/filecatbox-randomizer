@@ -15,11 +15,24 @@ Gere aleatóriamente conteúdo hosteado no [catbox.moe](https://catbox.moe/). O 
 
 ### :computer: Como instalar a aplicação:
 
+* Os dois scripts fazem a mesma coisa. Escolha um ou outro.
+
+* NODEJS
 ```bash
 git clone https://github.com/JonanthaW/filecatbox-randomizer.git
 npm install selenium-webdriver firefox
 node main.js
 ```
+* PYTHON
+```bash
+git clone https://github.com/JonanthaW/filecatbox-randomizer.git
+pip install selenium && pip install firefox
+python main.py
+```
+
+
+
+
 
 O script rodará em modo "-headless", ou seja, não abrirá nenhuma janela e tudo acontecerá pelo terminal.
 
@@ -29,6 +42,8 @@ O script rodará em modo "-headless", ou seja, não abrirá nenhuma janela e tud
 </p>
 
 # :bulb: Detalhes:
+
+* O arquivo "notFoundURLs.txt" contém os URLS testados (321474 links no dia 22/11/2023) e não encontrados.
 
 * Por padrão, o script abrirá apenas 1 tab do firefox. Você pode mudar essa quantia por meio da variável:
 ```
